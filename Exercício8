@@ -1,0 +1,86 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class Pizza {
+
+    private String nome;
+    private double valor;
+    private List<String> ingredientes;
+
+    public Pizza(String nome, double valor, List<String> ingredientes) {
+        this.nome = nome;
+        this.valor = valor;
+        this.ingredientes = ingredientes;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public List<String> getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(List<String> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+}
+
+class Pedido {
+
+    private List<Pizza> pizzas;
+    private double valorTotal;
+
+    public Pedido() {
+        this.pizzas = new ArrayList<>();
+        this.valorTotal = 0;
+    }
+
+    public void adicionarPizza(Pizza pizza) {
+        pizzas.add(pizza);
+        valorTotal += pizza.getValor();
+    }
+
+    public void cancelarPedido() {
+        pizzas.clear();
+        valorTotal = 0;
+    }
+
+
+    public void gerarRelatorio() {
+        System.out.println("Relatório do Pedido:");
+        System.out.println("Número total de pizzas: " + pizzas.size());
+        System.out.println("Valor total do pedido: R$" + valorTotal);
+        System.out.println("---------------------------------------------");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        Pizza pizza1 = new Pizza("Calabresa", 30.0, List.of("Calabresa", "Mussarela"));
+        Pizza pizza2 = new Pizza("Margherita", 35.0, List.of("Molho de tomate", "Mussarela", "Manjericão"));
+        Pizza pizza3 = new Pizza("Portuguesa", 32.0, List.of("Presunto", "Ovo", "Mussarela", "Cebola"));
+
+
+        Pedido pedido = new Pedido();
+        pedido.adicionarPizza(pizza1);
+        pedido.adicionarPizza(pizza2);
+        pedido.adicionarPizza(pizza3);
+
+
+        pedido.gerarRelatorio();
+    }
+}
